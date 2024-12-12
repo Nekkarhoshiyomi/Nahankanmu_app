@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         TextView button_mode = findViewById(R.id.btn);
         Button button = findViewById(R.id.btn);
 
-        final int[] left = {33};
-        final int[] right = {4};
+        final long[] left = {33};
+        final long[] right = {4};
 
         // ボタンのクリックリスナー
         button.setOnClickListener(new View.OnClickListener() {

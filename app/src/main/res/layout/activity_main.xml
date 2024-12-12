@@ -22,15 +22,11 @@
 
         <Switch
             android:id="@+id/swichan"
-            android:layout_width="320dp"
+            android:layout_width="222dp"
             android:layout_height="53dp"
-            android:gravity="center|clip_vertical"
+            android:gravity="center|left"
             android:text="@string/swichan"
             android:textSize="20dp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="50px" />
 
         <TextView
             android:id="@+id/answer"
@@ -46,8 +42,9 @@
 
         <Button
             android:id="@+id/btn"
-            android:layout_width="wrap_content"
-            android:layout_height="59dp"
+            android:layout_width="150dp"
+            android:layout_height="65dp"
+            android:gravity="center"
             android:text="@string/btn" />
 
     </LinearLayout>
