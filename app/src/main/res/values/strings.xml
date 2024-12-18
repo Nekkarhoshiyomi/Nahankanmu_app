@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Nahankamu app</string>
-    <string name="titele"><font size="30">阪神算ジェネレータ</font></string>
+    <string name="title"><font size="30">阪神算ジェネレータ</font></string>
     <string name="swichan"><font size="20">加算</font></string>
     <string name="btn">加算</string>
-    <string name="answer"><font size="30">33-4</font></string>
+    <string name="answer"><font size="31">Empty</font></string>
+    <string name="count"><font size="15">Empty</font></string>
 </resources>

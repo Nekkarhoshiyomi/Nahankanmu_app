@@ -29,15 +29,24 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        //TextViewの取得
         Switch swichan = findViewById(R.id.swichan);
         TextView mode = findViewById(R.id.swichan);
         TextView answer = findViewById(R.id.answer);
         TextView button_mode = findViewById(R.id.btn);
         Button button = findViewById(R.id.btn);
+        TextView count = findViewById(R.id.count);
 
-        final long[] left = {33};
-        final long[] right = {4};
+        //結果の初期化
+        answer.setText("ボタンを押してください");
+        count.setText("ここに押した回数が表示されます");
 
+        //数字の初期化
+        final long[] left = {0};
+        final long[] right = {0};
+        final int[] frequency = {0};
+
+        //seの初期化
         mediaPlayer = MediaPlayer.create(this, R.raw.sansanyon_se);
 
         // ボタンのクリックリスナー
@@ -45,20 +54,40 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (swichan.isChecked()) {
+
                     // 倍々モード
                     mediaPlayer.seekTo(0);
                     mediaPlayer.start();
 
-                    left[0] *= 2;
-                    right[0] *= 2;
-                } else {
+                    if (left[0] == 0 && right[0] == 0){
+
+                        left[0] += 33;
+                        right[0] += 4;
+
+                        frequency[0] = 1;
+
+                    }else{
+
+                        left[0] *= 2;
+                        right[0] *= 2;
+
+                        frequency[0] +=1;
+
+                    }
+
+                }else{
+
                     // 加算モード
                     mediaPlayer.seekTo(0);
                     mediaPlayer.start();
+
                     left[0] += 33;
                     right[0] += 4;
+
+                    frequency[0] += 1;
                 }
                 answer.setText(left[0] + "-" + right[0]);
+                count.setText(frequency[0] + "回");
             }
         });
 
@@ -67,21 +96,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+
                     mode.setText("倍々");
                     button_mode.setText("倍々");
 
-                    left[0] = 33;
-                    right[0] = 4;
+                    left[0] = 0;
+                    right[0] = 0;
 
-                    answer.setText(left[0] + "-" + right[0]);
-                } else {
+                    frequency[0] = 0;
+
+                    answer.setText("ボタンを押してください");
+                    count.setText("ここに押した回数が表示されます");
+
+                }else{
+
                     mode.setText("加算");
                     button_mode.setText("加算");
 
-                    left[0] = 33;
-                    right[0] = 4;
+                    left[0] = 0;
+                    right[0] = 0;
 
-                    answer.setText(left[0] + "-" + right[0]);
+                    frequency[0] = 0;
+
+                    answer.setText("ボタンを押してください");
+                    count.setText("ここに押した回数が表示されます");
+
                 }
             }
         });
