@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.CompoundButton;
 import android.widget.Button;
 import android.view.View;
+import android.media.MediaPlayer;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +38,23 @@ public class MainActivity extends AppCompatActivity {
         final long[] left = {33};
         final long[] right = {4};
 
+        mediaPlayer = MediaPlayer.create(this, R.raw.sansanyon_se);
+
         // ボタンのクリックリスナー
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (swichan.isChecked()) {
                     // 倍々モード
+                    mediaPlayer.seekTo(0);
+                    mediaPlayer.start();
+
                     left[0] *= 2;
                     right[0] *= 2;
                 } else {
                     // 加算モード
+                    mediaPlayer.seekTo(0);
+                    mediaPlayer.start();
                     left[0] += 33;
                     right[0] += 4;
                 }
@@ -75,5 +85,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        }
+    @Override
+    protected  void onDestroy(){
+        super.onDestroy();
+        if (mediaPlayer != null){
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }
