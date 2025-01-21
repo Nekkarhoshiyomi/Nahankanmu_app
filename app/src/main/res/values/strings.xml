@@ -5,4 +5,5 @@
     <string name="btn">加算</string>
     <string name="answer"><font size="31">Empty</font></string>
     <string name="count"><font size="15">Empty</font></string>
+    <string name="coppy">コピー</string>
 </resources>

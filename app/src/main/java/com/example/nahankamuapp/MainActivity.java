@@ -7,6 +7,10 @@ import android.widget.CompoundButton;
 import android.widget.Button;
 import android.view.View;
 import android.media.MediaPlayer;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         TextView button_mode = findViewById(R.id.btn);
         Button button = findViewById(R.id.btn);
         TextView count = findViewById(R.id.count);
+        Button coppyButton = findViewById(R.id.coppy);
 
         //結果の初期化
         answer.setText("ボタンを押してください");
@@ -90,6 +95,18 @@ public class MainActivity extends AppCompatActivity {
                 count.setText(frequency[0] + "回");
             }
         });
+
+        //ボタンクリックで結果をコピー
+       coppyButton.setOnClickListener(new View.OnClickListener() {
+           public void onClick(View v) {
+              String textCopy = left[0] + "-" + right[0];
+
+              ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+
+              ClipData clip = ClipData.newPlainText("label", textCopy);
+              clipboard.setPrimaryClip(clip);
+           }
+       });
 
         // スイッチの切り替えリスナー
         swichan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
