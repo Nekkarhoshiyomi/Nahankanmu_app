@@ -41,14 +41,14 @@ public class MainActivity extends AppCompatActivity {
         TextView count = findViewById(R.id.count);
         Button coppyButton = findViewById(R.id.coppy);
 
-        //結果の初期化
-        answer.setText("ボタンを押してください");
-        count.setText("ここに押した回数が表示されます");
-
         //数字の初期化
         final long[] left = {0};
         final long[] right = {0};
         final int[] frequency = {0};
+
+        //結果の初期化
+        answer.setText("0-0");
+        count.setText("0回");
 
         //seの初期化
         mediaPlayer = MediaPlayer.create(this, R.raw.sansanyon_se);
@@ -113,29 +113,23 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
-                    mode.setText("倍々");
-                    button_mode.setText("倍々");
-
                     left[0] = 0;
                     right[0] = 0;
 
                     frequency[0] = 0;
 
-                    answer.setText("ボタンを押してください");
-                    count.setText("ここに押した回数が表示されます");
+                    answer.setText("0-0");
+                    count.setText("0回");
 
                 }else{
 
-                    mode.setText("加算");
-                    button_mode.setText("加算");
-
                     left[0] = 0;
                     right[0] = 0;
 
                     frequency[0] = 0;
 
-                    answer.setText("ボタンを押してください");
-                    count.setText("ここに押した回数が表示されます");
+                    answer.setText("0-0");
+                    count.setText("0回");
 
                 }
             }
