@@ -1,5 +1,7 @@
 package com.example.nahankamuapp;
 
+import android.util.Log;
+
 import android.os.Bundle;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
+    private ShakeListener shakeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        Log.d("test", "this is first test");
+
+        shakeListener = new ShakeListener(this);
+        shakeListener.register();
+
         //TextViewの取得
         Switch swichan = findViewById(R.id.swichan);
         TextView mode = findViewById(R.id.swichan);
@@ -39,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         TextView button_mode = findViewById(R.id.btn);
         Button button = findViewById(R.id.btn);
         TextView count = findViewById(R.id.count);
-        Button coppyButton = findViewById(R.id.coppy);
+        Button copyButton = findViewById(R.id.copy);
 
         //数字の初期化
         final long[] left = {0};
@@ -95,17 +103,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //ボタンクリックで結果をコピー
-       coppyButton.setOnClickListener(new View.OnClickListener() {
-           public void onClick(View v) {
-              String textCopy = left[0] + "-" + right[0];
+        shakeListener.setOnShakeListener(() -> {
+            String textCopy = left[0] + "-" + right[0];
 
-              ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
-              ClipData clip = ClipData.newPlainText("label", textCopy);
-              clipboard.setPrimaryClip(clip);
-           }
-       });
+            ClipData clip = ClipData.newPlainText("label", textCopy);
+            clipboard.setPrimaryClip(clip);
+        });
 
         // スイッチの切り替えリスナー
         swichan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
