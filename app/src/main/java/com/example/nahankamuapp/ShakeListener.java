@@ -10,7 +10,7 @@ import android.hardware.SensorManager;
 
 public class ShakeListener implements SensorEventListener {
 
-    private static final float SHAKE_THRESHOLD = 50.0f;
+    private static final float SHAKE_THRESHOLD = 40.0f;
     private static final int SHAKE_WAIT_TIME_MS = 500;
 
     private SensorManager sensorManager;

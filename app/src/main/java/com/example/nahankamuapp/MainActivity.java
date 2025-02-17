@@ -1,11 +1,11 @@
 package com.example.nahankamuapp;
 
-import android.util.Log;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 
 import android.os.Bundle;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.CompoundButton;
 import android.widget.Button;
 import android.view.View;
 import android.media.MediaPlayer;
@@ -35,19 +35,15 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Log.d("test", "this is first test");
-
+        //ShakeListener之初期化.
         shakeListener = new ShakeListener(this);
         shakeListener.register();
 
         //TextViewの取得
-        Switch swichan = findViewById(R.id.swichan);
-        TextView mode = findViewById(R.id.swichan);
         TextView answer = findViewById(R.id.answer);
-        TextView button_mode = findViewById(R.id.btn);
         Button button = findViewById(R.id.btn);
         TextView count = findViewById(R.id.count);
-        Button copyButton = findViewById(R.id.copy);
+        Button resetButton = findViewById(R.id.resetButton);
 
         //数字の初期化
         final long[] left = {0};
@@ -65,39 +61,16 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (swichan.isChecked()) {
-
-                    // 倍々モード
-                    mediaPlayer.seekTo(0);
-                    mediaPlayer.start();
-
-                    if (left[0] == 0 && right[0] == 0){
-
-                        left[0] += 33;
-                        right[0] += 4;
-
-                        frequency[0] = 1;
-
-                    }else{
-
-                        left[0] *= 2;
-                        right[0] *= 2;
-
-                        frequency[0] +=1;
-
-                    }
-
-                }else{
 
                     // 加算モード
-                    mediaPlayer.seekTo(0);
-                    mediaPlayer.start();
+                mediaPlayer.seekTo(0);
+                mediaPlayer.start();
 
-                    left[0] += 33;
-                    right[0] += 4;
+                left[0] += 33;
+                right[0] += 4;
 
-                    frequency[0] += 1;
-                }
+                frequency[0] += 1;
+
                 answer.setText(left[0] + "-" + right[0]);
                 count.setText(frequency[0] + "回");
             }
@@ -112,34 +85,20 @@ public class MainActivity extends AppCompatActivity {
             clipboard.setPrimaryClip(clip);
         });
 
-        // スイッチの切り替えリスナー
-        swichan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
+            public void onClick(View view) {
+                left[0] = 0;
+                right[0] = 0;
 
-                    left[0] = 0;
-                    right[0] = 0;
+                frequency[0] = 0;
 
-                    frequency[0] = 0;
-
-                    answer.setText("0-0");
-                    count.setText("0回");
-
-                }else{
-
-                    left[0] = 0;
-                    right[0] = 0;
-
-                    frequency[0] = 0;
-
-                    answer.setText("0-0");
-                    count.setText("0回");
-
-                }
+                answer.setText("0-0");
+                count.setText("0回");
             }
         });
-        }
+
+    }
     @Override
     protected  void onDestroy(){
         super.onDestroy();

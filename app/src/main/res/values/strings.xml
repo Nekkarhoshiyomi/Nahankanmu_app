@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">Nahankamu app</string>
     <string name="title"><font size="30">阪神算ジェネレータ</font></string>
-    <string name="swichan"><font size="20">加算</font></string>
     <string name="btn">な阪関無</string>
     <string name="answer"><font size="31">null</font></string>
     <string name="count"><font size="15">null</font></string>
-    <string name="copy">コピー</string>
+    <string name="reset">リセット</string>
 </resources>
